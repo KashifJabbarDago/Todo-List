@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0px;
+        padding: 0px;
+
+    }
+
+    #header_tag {
+        text-align: center;
+        margin-top: 30px;
+    }
+
+    p {
+        font-weight: lighter;
+        font-size: 16px;
+        color: gray;
+        text-align: center;
+    }
+
+    .form_here {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    .form_here input {
+        padding: 8px 10px 8px 10px;
+        width: 220px;
+    }
+
+    .form_here button {
+        padding: 8px;
+        background-color: blue;
+        color: white;
+        font-family: fantasy;
+        letter-spacing: 2px;
+        border: 2px solid grey;
+        cursor: pointer;
+    }
+
+    .items_shower {
+        display: flex;
+        justify-content: center;
+        margin-top: 8px;
+    }
+
+    .items_shower .content {
+        display: flex;
+        justify-content: space-between;
+        width: 400px;
+        padding: 10px;
+        border: 1px solid black;
+    }
+
+    .items_shower .content input {
+        background-color: blue;
+        color: white;
+        padding: 4px;
+        letter-spacing: 0.5px;
+        cursor: pointer;
+    }
+
+    .items_shower .content b {
+        word-wrap: break-word;
+    }
+</style>
+
+<body>
+    <h1 id="header_tag">Welcome to your Todo List</h1>
+    <p>Manage your daily work!</p>
+    <div class="form_here">
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="text" name="item" required>
+            <button type="submit">Add item</button>
+        </form>
+    </div>
+    {% for i in data %}
+    <div class="items_shower">
+        <div class="content">
+            <b>{{ i.text }}</b>
+            <form action="deleteItem/{{i.id}}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+
+</html>
